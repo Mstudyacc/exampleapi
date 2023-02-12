@@ -1,4 +1,5 @@
 class Book < ApplicationRecord
-    validates :title, presence: true
-    validates :author, presence: true
+    belongs_to :author
+
+    validates :title, presence: true, length: { minimum: 3, maximum: 125 }
 end
