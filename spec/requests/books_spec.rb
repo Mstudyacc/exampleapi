@@ -22,10 +22,14 @@ describe 'Books API', type: :request do
     it 'create a new book' do 
       #Убедимся что в БД реально создаётся запись, проверяем просто каунтером 
       expect {
-        post '/api/v1/books', params: {book: {title: "Some book", author: "Some author"}}
+        post '/api/v1/books', params: {
+          book: {title: "Some book"},
+          author: {first_name: "Some", last_name: "author", age: "11"}
+        }
       }.to change {Book.count}.from(0).to(1)
       
       expect(response).to have_http_status(:created)
+      expect(Author.count).to eq(1)
     end
   end
 
